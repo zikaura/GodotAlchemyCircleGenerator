@@ -7,5 +7,6 @@ export_presets.cfg
 .mono/
 data_*/
 
+.vscode/
 # Build files
 bin
