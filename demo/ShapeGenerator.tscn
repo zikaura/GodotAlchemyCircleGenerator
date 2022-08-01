@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/alchemy-circle-generator/src/ShapeGenerator.cs" type="Script" id=1]
+
+[node name="ShapeGenerator" type="Node"]
+script = ExtResource( 1 )

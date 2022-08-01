@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Godot;
 
 public static class TextureDraw
 {
-    public static void drawLine(Texture2D tex, int x0, int y0, int x1, int y1, Color col, int thickness)
+    public const float D2R = (Mathf.Pi * 2f) / 360f;
+
+    public static void drawLine(Image tex, int x0, int y0, int x1, int y1, Color col, int thickness)
     {
         int dx, dy, incr1, incr2, d, x, y, xend, yend, xdirflag, ydirflag;
         int wid;
@@ -57,7 +57,7 @@ public static class TextureDraw
                 xend = x1;
             }
 
-            /* Set up line thickness */
+            // Set up line thickness
             wstart = y - wid / 2;
             for (w = wstart; w < wstart + wid; w++)
                 tex.SetPixel(x, w, col);
@@ -133,7 +133,7 @@ public static class TextureDraw
                 xdirflag = 1;
             }
 
-            /* Set up line thickness */
+            // Set up line thickness
             wstart = x - wid / 2;
             for (w = wstart; w < wstart + wid; w++)
                 tex.SetPixel(w, y, col);
@@ -183,7 +183,7 @@ public static class TextureDraw
 
 
 
-    static void gdImageHLine(Texture2D tex, int y, int x1, int x2, Color col, int thickness)
+    static void gdImageHLine(Image tex, int y, int x1, int x2, Color col, int thickness)
     {
         if (thickness > 1)
         {
@@ -207,7 +207,7 @@ public static class TextureDraw
         return;
     }
 
-    static void gdImageVLine(Texture2D tex, int x, int y1, int y2, Color col, int thickness)
+    static void gdImageVLine(Image tex, int x, int y1, int y2, Color col, int thickness)
     {
         if (thickness > 1)
         {
@@ -232,7 +232,7 @@ public static class TextureDraw
     }
 
 
-    static void _gdImageFilledHRectangle(Texture2D tex, int x1, int y1, int x2, int y2, Color col)
+    static void _gdImageFilledHRectangle(Image tex, int x1, int y1, int x2, int y2, Color col)
     {
         int x, y;
 
@@ -261,9 +261,9 @@ public static class TextureDraw
             x1 = 0;
         }
 
-        if (x2 >= tex.width)
+        if (x2 >= tex.GetWidth())
         {
-            x2 = tex.width - 1;
+            x2 = tex.GetWidth() - 1;
         }
 
         if (y1 < 0)
@@ -271,9 +271,9 @@ public static class TextureDraw
             y1 = 0;
         }
 
-        if (y2 >= tex.height)
+        if (y2 >= tex.GetHeight())
         {
-            y2 = tex.height - 1;
+            y2 = tex.GetHeight() - 1;
         }
 
         for (x = x1; (x <= x2); x++)
@@ -285,7 +285,7 @@ public static class TextureDraw
         }
     }
 
-    static void _gdImageFilledVRectangle(Texture2D tex, int x1, int y1, int x2, int y2, Color col)
+    static void _gdImageFilledVRectangle(Image tex, int x1, int y1, int x2, int y2, Color col)
     {
         int x, y;
 
@@ -314,9 +314,9 @@ public static class TextureDraw
             x1 = 0;
         }
 
-        if (x2 >= tex.width)
+        if (x2 >= tex.GetWidth())
         {
-            x2 = tex.width - 1;
+            x2 = tex.GetWidth() - 1;
         }
 
         if (y1 < 0)
@@ -324,9 +324,9 @@ public static class TextureDraw
             y1 = 0;
         }
 
-        if (y2 >= tex.height)
+        if (y2 >= tex.GetHeight())
         {
-            y2 = tex.height - 1;
+            y2 = tex.GetHeight() - 1;
         }
 
         for (y = y1; (y <= y2); y++)
@@ -355,7 +355,7 @@ public static class TextureDraw
 
 
 
-    public static void drawCircle(Texture2D tex, int cx, int cy, int r, Color col, int thickness)
+    public static void drawCircle(Image tex, int cx, int cy, int r, Color col, int thickness)
     {
         //int y = r;
         //float d = 1 / 4 - r;
@@ -390,7 +390,7 @@ public static class TextureDraw
             r++;
         }
     }
-    public static void drawFilledCircle(Texture2D tex, int cx, int cy, int r, Color col, Color bgcol,int thickness)
+    public static void drawFilledCircle(Image tex, int cx, int cy, int r, Color col, Color bgcol,int thickness)
     {
         for (int x = -r; x < r; x++)
         {
@@ -411,8 +411,8 @@ public static class TextureDraw
         
         if(sides > 0)
         {
-            float angdiff = Mathf.Deg2Rad * (360 / (sides));
-            rot = Mathf.Deg2Rad * (rot);
+            float angdiff = D2R * (360 / (sides));
+            rot = D2R * (rot);
             for (int i = 0; i < sides; i++)
             {
                 // trova i punti sulla circonferenza
@@ -424,7 +424,7 @@ public static class TextureDraw
         return values;
     }
 
-    public static void drawPolygon(Texture2D tex, int n, int r, int rot, int size, Color col, int thickness)
+    public static void drawPolygon(Image tex, int n, int r, int rot, int size, Color col, int thickness)
     {
         if (n <= 0)
         {
@@ -446,7 +446,7 @@ public static class TextureDraw
 
 
 
-    public static void drawFilledPolygon(Texture2D tex, int n, int r,int rot, int size, Color color, Color backgroundColor, int thickness)
+    public static void drawFilledPolygon(Image tex, int n, int r,int rot, int size, Color color, Color backgroundColor, int thickness)
     {
 
         Vector2[] p = getPoints(n, rot, r, size);
@@ -479,7 +479,7 @@ public static class TextureDraw
                 maxy = (int)p[i].y;
             }
         }
-        /* necessary special case: horizontal line */
+        // necessary special case: horizontal line
         if (n > 1 && miny == maxy)
         {
             x1 = x2 = (int)p[0].x;
@@ -504,11 +504,11 @@ public static class TextureDraw
         {
             miny = 0;
         }
-        if (maxy > tex.height - 1)
+        if (maxy > tex.GetHeight() - 1)
         {
-            maxy = tex.height - 1;
+            maxy = tex.GetHeight() - 1;
         }
-        /* Fix in 1.3: count a vertex only once */
+        // Fix in 1.3: count a vertex only once 
         for (y = miny; (y <= maxy); y++)
         {
             ints = 0;
@@ -583,5 +583,4 @@ public static class TextureDraw
         drawPolygon(tex, n, r, rot, size, color, thickness);
 
     }
-
 }
