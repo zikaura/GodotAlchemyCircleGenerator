@@ -16,7 +16,7 @@
             "request": "launch",
             "mode": "executable",
             "preLaunchTask": "build",
-            "executable": "C:/Users/ACER/Desktop/Code/GameDev/Godot/bin/Godot_v3.4.4-stable_mono_win32/Godot_v3.4.4-stable_mono_win32.exe\r",
+            "executable": "C:/Users/ACER/Desktop/Code/GameDev/Godot/bin/Godot_v3.4.4-stable_mono_win32/Godot_v3.4.4-stable_mono_win32.exe",
             "executableArguments": [
                 "--path",
                 "${workspaceRoot}"
@@ -28,7 +28,7 @@
             "request": "launch",
             "mode": "executable",
             "preLaunchTask": "build",
-            "executable": "C:/Users/ACER/Desktop/Code/GameDev/Godot/bin/Godot_v3.4.4-stable_mono_win32/Godot_v3.4.4-stable_mono_win32.exe\r",
+            "executable": "C:/Users/ACER/Desktop/Code/GameDev/Godot/bin/Godot_v3.4.4-stable_mono_win32/Godot_v3.4.4-stable_mono_win32.exe",
             "executableArguments": [
                 "--path",
                 "${workspaceRoot}",

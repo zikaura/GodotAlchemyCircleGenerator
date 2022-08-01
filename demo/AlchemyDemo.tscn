@@ -1,140 +1,214 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://demo/fonts/CascadiaCode.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://demo/fonts/TitilliumWeb-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://demo/ShapeGenerator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demo/SymbolDisplay.tscn" type="PackedScene" id=1]
+[ext_resource path="res://demo/SidePanel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://demo/fonts/TitilliumWeb-SemiBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://demo/scripts/GradientAnimator.cs" type="Script" id=4]
+[ext_resource path="res://demo/resources/AnimatedGradient.stylebox" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.0431373, 0.0509804, 0.0941176, 1 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 60
+[sub_resource type="DynamicFont" id=2]
+size = 25
 use_mipmaps = true
 use_filter = true
-extra_spacing_char = 1
-font_data = ExtResource( 2 )
-
-[sub_resource type="StyleBoxLine" id=6]
-color = Color( 1, 1, 1, 1 )
-grow_begin = -80.0
-grow_end = -80.0
-thickness = 2
-
-[sub_resource type="DynamicFont" id=5]
-size = 40
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -3
+font_data = ExtResource( 3 )
 
 [node name="AlchemyDemo" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="BGPanel" type="Panel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BGPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="SidePanel_L" type="Panel" parent="BGPanel/HBoxContainer"]
-margin_right = 400.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 400, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -650.0
+margin_top = -365.0
+margin_right = 650.0
+margin_bottom = 365.0
 custom_styles/panel = SubResource( 1 )
 
-[node name="DisplayArea" type="Panel" parent="BGPanel/HBoxContainer"]
-margin_left = 404.0
-margin_right = 1454.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 1050, 0 )
-custom_styles/panel = SubResource( 3 )
-
-[node name="MarginContainer" type="MarginContainer" parent="BGPanel/HBoxContainer/DisplayArea"]
-anchor_right = 1.0
+[node name="MainSectionContainer" type="MarginContainer" parent="BGPanel"]
+anchor_right = 0.772
 anchor_bottom = 1.0
-custom_constants/margin_right = 180
-custom_constants/margin_top = 100
-custom_constants/margin_left = 180
-custom_constants/margin_bottom = 50
+margin_right = 1.39998
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer"]
-margin_left = 180.0
-margin_top = 100.0
-margin_right = 870.0
-margin_bottom = 1030.0
+[node name="MainSection" type="VBoxContainer" parent="BGPanel/MainSectionContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 990.0
+margin_bottom = 715.0
 
-[node name="TitleLabel" type="Label" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2"]
-margin_right = 690.0
-margin_bottom = 92.0
-rect_min_size = Vector2( 0, 50 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 4 )
-text = "Alchemy Circle Generator"
+[node name="HeaderPanel" type="Panel" parent="BGPanel/MainSectionContainer/MainSection"]
+margin_right = 975.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = ExtResource( 5 )
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="BGPanel/MainSectionContainer/MainSection/HeaderPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -240.5
+margin_top = -19.5
+margin_right = 240.5
+margin_bottom = 19.5
+custom_fonts/font = SubResource( 2 )
+text = "Symbols Generated: [12 / 24]"
 align = 1
 valign = 1
 
-[node name="Underline" type="HSeparator" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2"]
-margin_top = 96.0
-margin_right = 690.0
-margin_bottom = 106.0
-custom_constants/separation = 10
-custom_styles/separator = SubResource( 6 )
-
-[node name="HSeparator" type="HSeparator" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2"]
+[node name="Spacer" type="HSeparator" parent="BGPanel/MainSectionContainer/MainSection"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 110.0
-margin_right = 690.0
-margin_bottom = 190.0
-custom_constants/separation = 80
+margin_top = 44.0
+margin_right = 975.0
+margin_bottom = 51.0
+custom_constants/separation = 7
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2"]
-margin_top = 194.0
-margin_right = 690.0
-margin_bottom = 814.0
+[node name="GridContainer" type="GridContainer" parent="BGPanel/MainSectionContainer/MainSection"]
+margin_top = 55.0
+margin_right = 975.0
+margin_bottom = 697.0
+custom_constants/vseparation = 14
+custom_constants/hseparation = 15
+columns = 6
 
-[node name="ShapeGenerator" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2/VBoxContainer" instance=ExtResource( 4 )]
-thickness = 8
-color = Color( 0.831373, 0.831373, 0.831373, 1 )
-backgroundColor = Color( 0, 0, 0, 1 )
-renderTargetNP = NodePath("../TextureRect")
+[node name="Panel" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
 
-[node name="TextureRect" type="TextureRect" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2/VBoxContainer"]
-margin_right = 690.0
-margin_bottom = 512.0
-rect_min_size = Vector2( 512, 512 )
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 6
+[node name="Panel2" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 165.0
+margin_right = 315.0
 
-[node name="HSeparator2" type="HSeparator" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0 )
-margin_top = 516.0
-margin_right = 690.0
-margin_bottom = 566.0
-custom_constants/separation = 50
+[node name="Panel3" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 330.0
+margin_right = 480.0
 
-[node name="TitleLabel2" type="Label" parent="BGPanel/HBoxContainer/DisplayArea/MarginContainer/VBoxContainer2/VBoxContainer"]
-margin_top = 570.0
-margin_right = 690.0
-margin_bottom = 620.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 5 )
-text = "#4453747"
-align = 1
-valign = 1
+[node name="Panel4" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 495.0
+margin_right = 645.0
 
-[node name="SidePanel_R" type="Panel" parent="BGPanel/HBoxContainer"]
-margin_left = 1458.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 462, 0 )
-custom_styles/panel = SubResource( 2 )
+[node name="Panel5" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 660.0
+margin_right = 810.0
+
+[node name="Panel6" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 825.0
+margin_right = 975.0
+
+[node name="Panel7" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_top = 164.0
+margin_bottom = 314.0
+
+[node name="Panel8" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 165.0
+margin_top = 164.0
+margin_right = 315.0
+margin_bottom = 314.0
+
+[node name="Panel9" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 330.0
+margin_top = 164.0
+margin_right = 480.0
+margin_bottom = 314.0
+
+[node name="Panel10" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 495.0
+margin_top = 164.0
+margin_right = 645.0
+margin_bottom = 314.0
+
+[node name="Panel11" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 660.0
+margin_top = 164.0
+margin_right = 810.0
+margin_bottom = 314.0
+
+[node name="Panel12" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 825.0
+margin_top = 164.0
+margin_right = 975.0
+margin_bottom = 314.0
+
+[node name="Panel13" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_top = 328.0
+margin_bottom = 478.0
+
+[node name="Panel14" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 165.0
+margin_top = 328.0
+margin_right = 315.0
+margin_bottom = 478.0
+
+[node name="Panel15" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 330.0
+margin_top = 328.0
+margin_right = 480.0
+margin_bottom = 478.0
+
+[node name="Panel16" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 495.0
+margin_top = 328.0
+margin_right = 645.0
+margin_bottom = 478.0
+
+[node name="Panel17" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 660.0
+margin_top = 328.0
+margin_right = 810.0
+margin_bottom = 478.0
+
+[node name="Panel18" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 825.0
+margin_top = 328.0
+margin_right = 975.0
+margin_bottom = 478.0
+
+[node name="Panel19" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_top = 492.0
+margin_bottom = 642.0
+
+[node name="Panel20" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 165.0
+margin_top = 492.0
+margin_right = 315.0
+margin_bottom = 642.0
+
+[node name="Panel21" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 330.0
+margin_top = 492.0
+margin_right = 480.0
+margin_bottom = 642.0
+
+[node name="Panel22" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 495.0
+margin_top = 492.0
+margin_right = 645.0
+margin_bottom = 642.0
+
+[node name="Panel23" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 660.0
+margin_top = 492.0
+margin_right = 810.0
+margin_bottom = 642.0
+
+[node name="Panel24" parent="BGPanel/MainSectionContainer/MainSection/GridContainer" instance=ExtResource( 1 )]
+margin_left = 825.0
+margin_top = 492.0
+margin_right = 975.0
+margin_bottom = 642.0
+
+[node name="SidePanel" parent="BGPanel" instance=ExtResource( 2 )]
+anchor_left = 0.773
+margin_left = 0.0999975
+margin_top = 15.0
+margin_bottom = -18.0
+rect_min_size = Vector2( 290, 695 )

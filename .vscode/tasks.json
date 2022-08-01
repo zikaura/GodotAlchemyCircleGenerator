@@ -3,7 +3,7 @@
     "tasks": [
         {
             "label": "build",
-            "command": "C:/Users/ACER/Desktop/Code/GameDev/Godot/bin/Godot_v3.4.4-stable_mono_win32/Godot_v3.4.4-stable_mono_win32.exe\r",
+            "command": "C:/Users/ACER/Desktop/Code/GameDev/Godot/bin/Godot_v3.4.4-stable_mono_win32/Godot_v3.4.4-stable_mono_win32.exe",
             "type": "process",
             "args": [
                 "--build-solutions",
