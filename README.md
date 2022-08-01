@@ -7,7 +7,8 @@ You can [test it online](http://ciaccodavi.de/qbdp/acg/)
 TODO:
 ------
 - Optimize drawing operations (high priority)
-- Prepare demo scene
-- Package core module as an addon
+- Prepare demo scene X
+- Make grid items selectable
+- Package core module as an addon X
 - Upload to Github pages
 - Setup CI for automated build and upload
