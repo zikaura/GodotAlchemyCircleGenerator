@@ -9,6 +9,6 @@ TODO:
 - Optimize drawing operations (high priority)
 - [X] Prepare demo scene
 - Make grid items selectable
-- [X] Package core module as an addon X
+- [X] Package core module as an addon
 - Upload to Github pages
 - Setup CI for automated build and upload
