@@ -46,7 +46,6 @@ margin_top = 7.0
 margin_right = 128.0
 margin_bottom = 22.0
 custom_fonts/font = SubResource( 2 )
-text = "#1111111111"
 align = 1
 valign = 2
 

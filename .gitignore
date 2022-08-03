@@ -7,5 +7,8 @@ export.cfg
 data_*/
 .vscode/
 
+# Test files
+runner.exe
+
 # Build files
 # dist/

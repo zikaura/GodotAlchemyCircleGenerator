@@ -30,9 +30,9 @@ public class SymbolDisplay : Panel
 	{
 		if (_event.GetType() == typeof(InputEventMouseButton))
 		{
-			if ( (((InputEventMouseButton) _event)).Pressed )
+			if ( (((InputEventMouseButton) _event)).Pressed && circleTexture != null )
 			{
-				sidePanel._OnSymbolSelected(seedValue);
+				sidePanel._OnSymbolSelected(seedValue, circleTexture);
 			}
 		}
 	}
