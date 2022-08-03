@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://demo/SymbolDisplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://demo/SidePanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://demo/fonts/TitilliumWeb-SemiBold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://demo/scripts/GradientAnimator.cs" type="Script" id=4]
 [ext_resource path="res://demo/resources/AnimatedGradient.stylebox" type="StyleBox" id=5]
+[ext_resource path="res://demo/AlchemyDemo.cs" type="Script" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
@@ -19,6 +20,7 @@ font_data = ExtResource( 3 )
 [node name="AlchemyDemo" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 6 )
 
 [node name="BGPanel" type="Panel" parent="."]
 anchor_left = 0.5
@@ -63,7 +65,7 @@ margin_top = -19.5
 margin_right = 240.5
 margin_bottom = 19.5
 custom_fonts/font = SubResource( 2 )
-text = "Symbols Generated: [12 / 24]"
+text = "Symbols Generated (24 / 24)"
 align = 1
 valign = 1
 
