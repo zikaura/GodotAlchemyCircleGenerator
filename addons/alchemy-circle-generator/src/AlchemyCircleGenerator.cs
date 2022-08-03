@@ -3,23 +3,15 @@ using Godot;
 
 public class AlchemyCircleGenerator : Node
 {
-    private bool _generate;
-    [Export] public int size = 512;
+    [Export] public int size = 256;
     [Export] public int thickness;
     [Export] public Color color;
     [Export] public Color backgroundColor;
-    [Export] public bool generate
-    {
-        set
-        {
-            _generate = value;
-            RegenerateImage ();
-        }
-        get => _generate;
-    }
 
     // Must point to a Node with a "texture" property
     [Export] public NodePath renderTargetNP;
+    /// <summary>If set to true, image will be automatically generated when scene starts</summary>
+    [Export] public bool autoGenerate;
 
     public Alchemist circleGenerator;
     public ImageTexture texture;
@@ -28,23 +20,31 @@ public class AlchemyCircleGenerator : Node
     public override void _Ready ()
     {
         texture = new ImageTexture ();
-        if (renderTargetNP != null)
+        circleGenerator = new Alchemist (
+                            color, backgroundColor, 
+                            thickness, size );
+
+        if (autoGenerate)
         {
-            renderTarget = GetNode (renderTargetNP);
-            circleGenerator = new Alchemist (color, backgroundColor, thickness, size);
-            RegenerateImage ();
+            if (renderTargetNP != null)
+            {   
+                renderTarget = GetNode (renderTargetNP);
+                RegenerateImage (0);
+            }
+            else GD.PrintErr ("Render target hasn't been assigned.");
         }
-        else GD.PrintErr ("Render target hasn't been assigned.");
     }
 
-    public void RegenerateImage ()
+    public void RegenerateImage (int seed)
     {
+        // int seed = Mathf.RoundToInt(
+        // (float) GD.RandRange(0.0, 24.0));
         if (renderTargetNP != null)
         {
             if (renderTarget != null)
             {
                 Image textureImage = new Image ();
-                circleGenerator.GenerateImage ();
+                circleGenerator.GenerateImage (seed);
                 textureImage.CopyFrom (circleGenerator.textureImage);
                 renderTarget = GetNode (renderTargetNP);
                 texture.CreateFromImage (textureImage);
@@ -54,7 +54,7 @@ public class AlchemyCircleGenerator : Node
             {
                 renderTarget = GetNode (renderTargetNP);
                 Image textureImage = new Image ();
-                circleGenerator.GenerateImage ();
+                circleGenerator.GenerateImage (seed);
                 textureImage.CopyFrom (circleGenerator.textureImage);
                 renderTarget = GetNode (renderTargetNP);
                 texture.CreateFromImage (textureImage);
@@ -62,5 +62,13 @@ public class AlchemyCircleGenerator : Node
             }
         }
         else GD.PrintErr ("Render target hasn't been assigned.");
+    }
+
+    public void _OnButtonPressed()
+    {
+        string seedInput = GetNode<TextEdit>
+        ("../TextFieldContainer/TextEdit").Text;
+        int seed = int.Parse(seedInput);
+        RegenerateImage(seed);
     }
 }
