@@ -2,7 +2,7 @@ using Godot;
 
 public static class TextureDraw
 {
-    public const float D2R = (Mathf.Pi * 2f) / 360f;
+    public const float Deg2Rad = (Mathf.Pi * 2f) / 360f;
 
     public static void drawLine (Image tex, int x0, int y0, int x1, int y1, Color col, int thickness)
     {
@@ -392,8 +392,8 @@ public static class TextureDraw
 
         if (sides > 0)
         {
-            float angdiff = D2R * (360 / (sides));
-            rot = D2R * (rot);
+            float angdiff = Deg2Rad * (360 / (sides));
+            rot = Deg2Rad * (rot);
             for (int i = 0; i < sides; i++)
             {
                 // trova i punti sulla circonferenza
