@@ -1,0 +1,16 @@
+TODO:
+------
+- [ ] Optimize drawing operations
+- - Rewrite `TextureDraw` class to write to a color array before commiting to the image instance
+- - Ensure that GC removes all texture and image instances when regenerating 
+- [X] Prepare demo scene
+- [X] Make grid items selectable
+- [ ] Implement colored circles
+- [ ] Improve visual feedback of selected grid item
+- [X] Package core module as an addon
+- [ ] Make alchemy circle a resource, not a node
+- [ ] Rename methods and classes
+- [ ] Add download button to side panel and implement functionality 
+- [ ] Make UI responsive even as the circles generate (Threading? Async?)
+- [ ] Upload to Github pages
+- [ ] Setup CI for automated build and upload
