@@ -22,31 +22,26 @@ public class SidePanel : Panel
             ( Colors.WhiteSmoke, new Color
                 (0.141176f, 0.141176f, 0.141176f),
             4, 256);
-        _OnSymbolSelected(0);
+        _OnSymbolSelected(0, null);
     }
 
-    // Should the image be regenerated or just passed directly? 
-    public void GenerateCircle(int seedValue)
-    {
-        Image textureImage = new Image ();
-        ImageTexture texture = new ImageTexture();
-        circleGenerator.GenerateImage (seedValue);
-        textureImage.CopyFrom (circleGenerator.textureImage);
-        texture.CreateFromImage (textureImage);
-        symbolPreview.Texture = texture;
-    }
-
-    public void _OnSymbolSelected(int seedValue)
+    public void _OnSymbolSelected(int seedValue, Texture texture)
     {
         int currentSeedValue = int.Parse
         (seedLabel.Text.Replace("#", ""));
 
-        if (seedValue != currentSeedValue) 
+        if ((seedValue != currentSeedValue) && (texture != null)) 
         {
-            GenerateCircle(seedValue);
+            symbolPreview.Texture = texture;
             seedLabel.Text = $"#{seedValue}";
         }
     }
 
-    public void _OnRegenerateButtonPressed() => mainWindow._OnRegenerateButtonPressed();
+    public void _OnRegenerateButtonPressed()
+    {
+        // symbolPreview.Texture.Dispose();
+        
+        symbolPreview.Texture = null;
+        mainWindow._OnRegenerateButtonPressed();
+    }
 }

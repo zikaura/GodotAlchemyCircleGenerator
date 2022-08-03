@@ -128,7 +128,7 @@ margin_top = 292.0
 margin_right = 276.0
 margin_bottom = 322.0
 custom_fonts/font = SubResource( 12 )
-text = "#4523623"
+text = "#00000"
 align = 1
 
 [node name="Spacer3" type="HSeparator" parent="MarginContainer/VBoxContainer"]
