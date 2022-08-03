@@ -22,11 +22,11 @@ public class Alchemist
         textureImage = new Image ();
     }
 
-    public void GenerateImage ()
+    public void GenerateImage (int seedID)
     {
         textureImage.Create (size, size, false, Image.Format.Rgbaf);
         ResetImage (textureImage, size, size, backgroundColor);
-        Generate (0);
+        Generate (seedID);
     }
 
     void ResetImage (Image image, int width, int height, Color color)
