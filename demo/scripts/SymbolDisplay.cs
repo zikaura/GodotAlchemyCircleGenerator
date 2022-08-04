@@ -26,11 +26,13 @@ public class SymbolDisplay : Panel
 		displayRect = GetNode<TextureRect>("VBoxContainer/TextureRect");
 	}
 
-	public void _OnPanelGUIInput(InputEvent _event)
+	public void _OnPanelGUIInput(InputEvent ev)
 	{
-		if (_event.GetType() == typeof(InputEventMouseButton))
+		if (ev.GetType() == typeof(InputEventMouseButton))
 		{
-			if ( (((InputEventMouseButton) _event)).Pressed && circleTexture != null )
+			var evnt = (InputEventMouseButton) ev;
+			var isLMB = evnt.ButtonIndex == (int) ButtonList.Left;
+			if ( evnt.Pressed && (isLMB) && circleTexture != null )
 			{
 				sidePanel._OnSymbolSelected(seedValue, circleTexture);
 			}
