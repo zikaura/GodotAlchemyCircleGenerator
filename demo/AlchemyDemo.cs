@@ -3,24 +3,29 @@ using System;
 
 public class AlchemyDemo : Control
 {
-	private SidePanel sidePanel;
-	private Timer generatorTimer;
 	private int currentSeedOffset;
 	private int displayPanelIndex = 0;
-	private Alchemist circleGenerator;
+
+	private Timer generatorTimer;
 	private GridContainer gridContainer;
+
+	private Label headerLabel;
+	private SidePanel sidePanel;
+	private Alchemist circleGenerator;
 	private SymbolDisplay[] displayPanels;
 
 	public override void _Ready()
     {
         gridContainer = GetNode<GridContainer>
         ("BGPanel/MainSectionContainer/MainSection/GridContainer");
+		headerLabel = GetNode<Label>
+		("BGPanel/MainSectionContainer/MainSection/HeaderPanel/Label");
         generatorTimer = GetNode<Timer>("GeneratorTimer");
 		sidePanel = GetNode<SidePanel>("BGPanel/SidePanel");
 
         AssignSeedOffset();
         generatorTimer.Connect("timeout", this,
-                nameof(_OnGeneratorTimerTimeout));
+            nameof(_OnGeneratorTimerTimeout));
 
         Color backgroundColor = new Color
         (0.141176f, 0.141176f, 0.141176f);
@@ -35,7 +40,7 @@ public class AlchemyDemo : Control
 	{
 		GD.Randomize();
 		return Mathf.RoundToInt
-		( (float) GD.RandRange(0.0, 500.0) );
+		((float) GD.RandRange(0.0, 500.0));
 	}
 
     private void AssignSeedOffset() => currentSeedOffset = GetSeedOffset();
@@ -51,11 +56,6 @@ public class AlchemyDemo : Control
         }
     }
 
-    public void _OnRegenerateButtonPressed()
-	{
-		if (generatorTimer.IsStopped()) generatorTimer.Start();
-	}
-
 	public ImageTexture GenerateCircle(int seedValue)
 	{
 		ImageTexture texture = new ImageTexture();
@@ -64,13 +64,30 @@ public class AlchemyDemo : Control
 		return texture;
 	}
 
+    private void UpdateLoadingInfo(int currentIndex)
+    {
+		int panelCount = gridContainer.GetChildCount();
+		if (currentIndex != panelCount)
+		{
+			headerLabel.Text = "Symbols Generated " + 
+			$"({currentIndex} / {panelCount})";
+		}
+		else headerLabel.Text = "Complete :)";
+    }
+
+    public void _OnRegenerateButtonPressed()
+	{
+		if (generatorTimer.IsStopped()) generatorTimer.Start();
+	}
+
 	public void _OnGeneratorTimerTimeout()
 	{
 		SymbolDisplay displayPanel = displayPanels[displayPanelIndex];
 		displayPanel.seedValue = displayPanelIndex + currentSeedOffset;
 		displayPanel.circleTexture = GenerateCircle(displayPanelIndex + currentSeedOffset);
-		displayPanelIndex++;
+		UpdateLoadingInfo(++displayPanelIndex);
 		
+		// All panels have been assigned to, clean up
 		if (displayPanelIndex == displayPanels.Length)
 		{
 			AssignSeedOffset();

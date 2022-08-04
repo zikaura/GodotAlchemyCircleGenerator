@@ -23,7 +23,7 @@ anchor_bottom = 1.0
 script = ExtResource( 6 )
 
 [node name="GeneratorTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.05
 
 [node name="BGPanel" type="Panel" parent="."]
 anchor_left = 0.5
@@ -68,7 +68,7 @@ margin_top = -19.5
 margin_right = 240.5
 margin_bottom = 19.5
 custom_fonts/font = SubResource( 2 )
-text = "Symbols Generated (24 / 24)"
+text = "..."
 align = 1
 valign = 1
 
